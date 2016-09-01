@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar ionic>
+    <ion-title>
+      Nearby Restaurants
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (search)="getRestaurants()"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let restaurant of restaurants" text-wrap>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img [src]="restaurant.photos[0].thumbnail" />
+          </ion-col>
+          <ion-col width-67>
+            <h2>{{restaurant.name}}</h2>
+            <p>
+              <ion-icon *ngFor="let star of getArray(restaurant.rating)" name="star"></ion-icon>
+              {{restaurant.reviewCount}} reviews
+            </p>
+            <p>{{restaurant.address}}, {{restaurant.city}}</p>
+            <p>{{restaurant.categories}}</p>
+          </ion-col>
+          <ion-col width-10 text-right>
+            <p>{{restaurant.distance}}mi</p>            
+            <p>
+              <ion-icon name ="logo-usd" *ngFor="let dollar of getArray(restaurant.price)"></ion-icon>
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>      
+    </ion-item>
+  </ion-list>
+</ion-content>
